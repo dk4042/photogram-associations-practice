@@ -20,17 +20,21 @@ class User < ApplicationRecord
   # Association accessor methods to define:
   
   ## Direct associations
-
+ 
   # User#comments: returns rows from the comments table associated to this user by the author_id column
+    has_many(:comments, class_name: "Comments", foreign_key: "author_id")
 
-  # User#own_photos: returns rows from the photos table  associated to this user by the owner_id column
+  # User#own_photos:
+    has_many(:own_photos, class_name: "Photos", foreign_key: "owner_id")
 
   # User#likes: returns rows from the likes table associated to this user by the fan_id column
+    belongs_to(:likes, class_name: "Likes", foreign_key: "fan_id")
 
   # User#sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column
+    has_many(:sent_follow_requests, class_name: "Follow", foreign_key: "sender_id")
 
   # User#received_follow_requests: returns rows from the follow requests table associated to this user by the recipient_id column
-
+    has_many(:received_follow_requests, class_name: "Follow", foreign_key: "recipient_id")
 
   ### Scoped direct associations
 
